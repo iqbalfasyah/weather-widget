@@ -126,6 +126,10 @@
 }
 .weather-widget-curr-temp .curr-temp-icon {
   margin-right: 19px;
+  height: 66px;
+}
+.weather-widget-curr-temp .curr-temp-icon img {
+  height: 100%;
 }
 .weather-widget-curr-temp .curr-temp-text {
   margin-right: 19px;

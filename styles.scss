@@ -141,6 +141,11 @@
 
         .curr-temp-icon {
             margin-right: 19px;
+            height: 66px;
+
+            img{
+                height: 100%;
+            }
         }
 
         .curr-temp-text {
