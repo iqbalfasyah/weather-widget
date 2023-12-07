@@ -1,17 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Widget</title>
+
+    <!-- Font Family Lexend -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@200;300;400;500;600;700">
+    <!-- End Font Family Lexend -->
+
+    <!-- Font Family Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@200;300;400;500;600;700">
+    <!-- End Font Family Roboto -->
+
+    <!-- Font Family Inter -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:wght@200;300;400;500;600;700">
+    <!-- End Font Family Inter -->
+
+    <!-- Font Family Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700">
+    <!-- End Font Family Poppins -->
+
+    <link href="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.css"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 </head>
+
 <body>
     <div class="weather-widget" id="weather-widget">
-        <!-- Weather data will be displayed here dynamically -->
+        <div class="weather-widget-dropdown">
+            <select id="select-city" placeholder="Location">
+                <option value="Sydney">Sydney</option>
+                <option value="Melbourne">Melbourne</option>
+                <option value="Brisbane">Brisbane</option>
+                <option value="Perth">Perth</option>
+                <option value="Adelaide">Adelaide</option>
+                <option value="Canberra">Canberra</option>
+                <option value="Hobart">Hobart</option>
+                <option value="Darwin">Darwin</option>
+            </select>
+        </div>
+        <div class="weather-widget-curr-temp" id="curr-temp">
+            <div class="inner">
+                <div class="curr-temp-icon">
+                    <img src="images/icon-wave.svg" class="img-fluid" alt="Icon"/>
+                </div>
+                <div class="curr-temp-text">
+                    <h2 class="curr-temp-text-val">
+                        20ºC
+                    </h2>
+                    <p class="curr-temp-text-name">
+                        Cloudy
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="weather-widget-sun" id="sun">
+            <div class="inner">
+                <div class="weather-widget-sun-left">
+                    <img src="images/icon-sunrise.svg" class="img-fluid" alt="Icon Sunrise">
+                    <p class="sunrise sunrise-time">06:44</p>
+                </div>
+                <div class="weather-widget-sun-center">
+                    <div class="line"></div>
+                </div>
+                <div class="weather-widget-sun-right">
+                    <img src="images/icon-sunrise.svg" class="img-fluid" alt="Icon Sunset">
+                    <p class="sunset sunset-time">17:58</p>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" class="btn-view-full-forecast"> VIEW FULL FORECAST </a>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="//rawgithub.com/indrimuska/jquery-editable-select/master/dist/jquery-editable-select.min.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

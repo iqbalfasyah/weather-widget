@@ -1,48 +1,54 @@
 $(document).ready(function() {
-    const appId = '';
-    // Function to get user's location based on IP address
-    function getUserLocation() {
+    const appId = 'fc464c0cf8adce4c9dbd6a16e276f04a';
+
+    // Function to get weather data based on city name
+    function getWeatherData(city) {
         return new Promise((resolve, reject) => {
-            $.get("https://ipinfo.io", function(response) {
+            $.get(`https://api.openweathermap.org/data/2.5/weather?q=${city},au&units=metric&appid=${appId}`, function(response) {
                 resolve(response);
-            }, "json");
+            }, "json").fail(function(error) {
+                reject(error);
+            });
         });
     }
 
-    // Function to get weather data based on coordinates
-    function getWeatherData(latitude, longitude) {
-        return new Promise((resolve, reject) => {
-            $.get(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${appId}`, function(response) {
-                resolve(response);
-            }, "json");
-        });
-    }
+    // Event listener for dropdown change
+    $("#select-city").change(function() {
+        var selectedCity = $(this).val();
 
-    // Fetch user's location
-    getUserLocation().then(function(location) {
-        // Extract coordinates
-        var coordinates = location.loc.split(',');
-        var latitude = coordinates[0];
-        var longitude = coordinates[1];
+        console.info(selectedCity);
 
-        // Fetch weather data based on coordinates
-        getWeatherData(latitude, longitude).then(function(weatherData) {
+        // Fetch weather data based on the selected city
+        getWeatherData(selectedCity).then(function(weatherData) {
+
+            console.info(weatherData);
             // Extract temperature in Celsius and Fahrenheit
-            var tempInCelsius = (weatherData.main.temp - 273.15).toFixed(2);
-            var tempInFahrenheit = ((weatherData.main.temp - 273.15) * 9 / 5 + 32).toFixed(2);
+            const tempInCelsius = Math.round(weatherData.main.temp)+ 'ºC';
+            const weatherDesc = weatherData.weather[0].main;
+            
+            // Extract relevant information
+            var dt = new Date(weatherData.dt * 1000);
+            var sunrise = new Date(weatherData.sys.sunrise * 1000);
+            var sunset = new Date(weatherData.sys.sunset * 1000);
+            const currTimeZone = `Australia/${selectedCity}`; 
+            // Convert times to local time
+            var dtLocal = dt.toLocaleString('en-AU', { timeZone: currTimeZone });
+            var sunriseLocal = sunrise.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false, timeZone: currTimeZone });
+            var sunsetLocal = sunset.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false, timeZone: currTimeZone });
 
-            // Create HTML structure for weather widget
+            // Update HTML structure for weather widget
             var weatherWidget = $("#weather-widget");
-            weatherWidget.html(`
-                <h2>${weatherData.name}, ${weatherData.sys.country}</h2>
-                <p>${weatherData.weather[0].description}</p>
-                <div class="temperature">
-                    <p>${tempInCelsius} °C</p>
-                    <p>${tempInFahrenheit} °F</p>
-                </div>
-                <p>Humidity: ${weatherData.main.humidity}%</p>
-                <p>Wind Speed: ${weatherData.wind.speed} m/s</p>
-            `);
+
+            weatherWidget.find(".curr-temp-text-val").text(tempInCelsius);
+            weatherWidget.find(".curr-temp-text-name").text(weatherDesc);
+            weatherWidget.find(".sunrise-time").text(sunriseLocal);
+            weatherWidget.find(".sunset-time").text(sunsetLocal);
+
+        }).catch(function(error) {
+            console.error("Error fetching weather data:", error);
         });
     });
+
+    // $('#select-city').editableSelect();
+
 });

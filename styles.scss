@@ -1,0 +1,244 @@
+:root {
+    /**************************************  All Colours **********************************/
+    --core1: #500669;
+    --core2: #E83B8D;
+    --secondary1: #A31C86;
+    --secondary2: #FF1753;
+    --secondary3: #F7A00E;
+    --gradient1: #7754A3;
+    --gradient2: #E462A5;
+    --gradient3: #FDC073;
+    --black: #000000;
+    --gray900: #282828;
+    --gray800: #4b4b4b;
+    --gray700: #5e5e5e;
+    --gray600: #727272;
+    --gray500: #868686;
+    --gray400: #a6a6a6;
+    --gray300: #BBBBBB;
+    --gray200: #DDDDDD;
+    --gray100: #e8e8e8;
+    --gray50: #f3f3f3;
+    --white: #FFFFFF;
+    --dynamic-black: #1D1D1D;
+    --border-gray-color: #EDEDED;
+    --box-shadow-color-1: #32325D40;
+    --box-shadow-color-2: #0000004D;
+    --border-overlays: #E5E5E533;
+    --hope-plum: #CA00B9;
+    /************************************** End All Colours **********************************/
+
+
+    /************************************* Font Family **************************************/
+    --font-lexend: 'Lexend', sans-serif;
+    --font-roboto: 'Roboto', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-poppins: 'Poppins', sans-serif;
+    /************************************* End Font Family **********************************/
+
+
+    /************************************* Font Size **************************************/
+    --font-xx-large: 40px;
+    --font-x-large: 36px;
+    --font-large: 26px;
+    --font-medium: 20px;
+    --font-small: 16px;
+    --font-x-small: 14px;
+
+    @media (max-width: 767px) {
+        --font-xx-large: 36px;
+        --font-x-large: 32px;
+        --font-large: 22px;
+        --font-medium: 20px;
+    }
+
+    /************************************* End Font Size **********************************/
+
+}
+
+.weather-widget {
+    background-color: var(--gray50);
+    max-width: 297px;
+    max-height: 207px;
+    padding: 12px 22px;
+    border-radius: 10px;
+
+    @mixin select-style {
+        background-color: var(--white);
+        border-color: var(--white);
+        border-radius: 10px;
+        padding: 12px 9px 12px 9px;
+        padding-block: 0px;
+        padding-inline: 12px 0px;
+        height: 44px;
+    }
+
+    @mixin text-style {
+        font-family: var(--font-lexend);
+        font-size: 13px;
+        font-weight: 300;
+        line-height: 21px;
+        letter-spacing: 0em;
+        text-align: left;
+    }
+
+    &-dropdown {
+        width: 100%;
+        height: 44px;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 10px;
+
+        input {
+            background-image: url('images/icon-arrow-down-weather.svg');
+            background-repeat: no-repeat;
+            background-position: center right 20px;
+            width: 100%;
+            @include select-style;
+            border: 0px;
+            outline: none;
+            padding-right: 0px !important;
+            @include text-style;
+            color: var(--gray500);
+
+            &.open {
+                border-bottom-left-radius: 0px;
+                border-bottom-right-radius: 0px;
+            }
+        }
+
+        ul {
+            background: var(--white);
+            border: 0px;
+            overflow: hidden;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            box-shadow: 0px 13px 27px -5px #32325D40;
+            box-shadow: 0px 8px 16px -8px #0000004D;
+
+            li {
+                padding: 5px 12px;
+                @include text-style;
+                color: var(--gray900);
+
+                &.selected {
+                    background: var(--gray500);
+                    color: var(--white);
+                }
+            }
+        }
+    }
+
+    &-curr-temp {
+        margin-bottom: 11px;
+
+        .inner {
+            display: inline-flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .curr-temp-icon {
+            margin-right: 19px;
+        }
+
+        .curr-temp-text {
+            margin-right: 19px;
+
+            &-val {
+                font-family: var(--font-lexend);
+                font-size: 34px;
+                font-weight: 700;
+                line-height: 43px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: var(--dynamic-black);
+                margin: 0px;
+            }
+
+            &-name {
+                font-family: var(--font-lexend);
+                font-size: 14px;
+                font-weight: 300;
+                line-height: 18px;
+                letter-spacing: 0em;
+                text-align: left;
+                color: var(--dynamic-black);
+                margin: 0px;
+            }
+        }
+    }
+
+    &-sun {
+        margin-bottom: 6px;
+
+        .inner {
+            width: 100%;
+            display: inline-flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &-left,
+        &-right {
+            display: block;
+            text-align: center;
+
+            img {
+                margin-bottom: 4px;
+            }
+
+            p {
+                font-family: var(--font-roboto);
+                font-size: 10px;
+                font-weight: 400;
+                line-height: 12px;
+                letter-spacing: 0em;
+                text-align: center;
+                color: var(--dynamic-black);
+                margin: 0px;
+            }
+        }
+
+        &-center {
+            width: 100%;
+            padding-left: 11px;
+            padding-right: 3px;
+            margin-top: -5px;
+
+            .line {
+                background: linear-gradient(90deg, #FCB949 0%, rgba(217, 217, 217, 0) 105.71%);
+                width: 100%;
+                height: 3px;
+            }
+        }
+
+        
+    }
+
+    .btn-view-full-forecast{
+        width: 100%;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        font-family: var(--font-lexend);
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 14px;
+        letter-spacing: -0.20000000298023224px;
+        text-align: left;
+        color: var(--gray700);
+        text-decoration: none;
+        
+        &::before{
+            content: '';
+            background-image: url('images/icon-arrow-circle-up-right.svg');
+            background-repeat: no-repeat;
+            display: block;
+            width: 15px;
+            height: 14px;
+            margin-right: 3px;
+        }
+    }
+}
